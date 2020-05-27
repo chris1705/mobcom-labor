@@ -13,7 +13,7 @@ M = 4;            % Modulation order
 ovs = 8;          % Samples per symbol
 span = 10;        % Filter span in symbols
 rolloff = 0.25;   % Rolloff factor
-skipSymbols = 10; % Bits die der Übertragung vorangestellt werden (Einschwingen)
+skipSymbols = 86; % Bits die der Übertragung vorangestellt werden (Einschwingen)
 
 % Vorberechnungen
 bps = log2(M);    % Bits/symbol
@@ -67,13 +67,13 @@ end
 eyediagram(rxSig(displaySkip:1000 + displaySkip),ovs); % Figure 3
 
 figure()
-plot(real(rxSig(1:20))) % Figure 4
+plot(real(rxSig(displaySkip:displaySkip + 100))) % Figure 4
 
 figure()
 
 % FRAGE: Warum ist das Konstellationsdiagramm leer?
 constDiagram = comm.ConstellationDiagram('SamplesPerSymbol',ovs, ...
-    'SymbolsToDisplaySource','Property','SymbolsToDisplay',100);
+    'SymbolsToDisplaySource','Property','SymbolsToDisplay',1000);
 constDiagram(modSig); % Figure 5
 
 % Downsampling
